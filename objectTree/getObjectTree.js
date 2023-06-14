@@ -27,7 +27,11 @@ function getObjectTree(obj) {
 function getNodeTree(nodeArray, depthLvl) {
     
         for (key in nodeArray) {
-            console.log('-'.repeat(depthLvl) + nodeArray[key].name)
+            if(key != nodeArray.length-1) {
+                console.log('├'+'-'.repeat(depthLvl) + nodeArray[key].name)
+            } else {
+                console.log('└'+'-'.repeat(depthLvl) + nodeArray[key].name)
+            }
             getNodeTree(nodeArray[key].items, newlvl = depthLvl+1)
         }
     
@@ -39,9 +43,7 @@ function isEmpty(obj) {
       return false;
     }
     return true;
-  }
-  
-
+}
 
 //Запуск программы
 getObjectTree(treeObj)
