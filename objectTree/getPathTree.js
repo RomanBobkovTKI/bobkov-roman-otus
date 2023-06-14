@@ -4,6 +4,7 @@ const fs = require('fs');
 let fileCount = 0;
 let dirCount = 0;
 
+
 function getPathTree(name, depth) {
 
     const currentFiles = fs.readdirSync(name, { withFileTypes: true })
@@ -16,7 +17,10 @@ function getPathTree(name, depth) {
 
         if(element.isDirectory()) {
             dirCount +=1;
-            getPathTree(`${name}/${element.name}`, newDepth=depth + 1)
+            if (depth < _depth) {
+                getPathTree(`${name}/${element.name}`, newDepth=depth + 1)
+            }
+            
         } else {
             fileCount +=1;
         }
