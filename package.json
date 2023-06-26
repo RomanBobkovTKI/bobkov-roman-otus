@@ -4,7 +4,7 @@
   "description": "nodejs course",
   "main": "index.js",
   "scripts": {
-    "test": "TEST",
+    "test": "jest",
     "getObject": "node objectTree/getObjectTree.js"
   },
   "repository": {
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/RomanBobkovTKI/bobkov-roman-otus/issues"
   },
-  "homepage": "https://github.com/RomanBobkovTKI/bobkov-roman-otus#readme"
+  "homepage": "https://github.com/RomanBobkovTKI/bobkov-roman-otus#readme",
+  "dependencies": {
+    "jest": "^29.5.0",
+    "mock-fs": "^5.2.0"
+  }
 }

@@ -26,7 +26,7 @@ function getPathTree(name, depth) {
         }
     })
 
+    console.log(`${dirCount} directories, ${fileCount} files`)
 }
 
-getPathTree(path, 1)
-console.log(`${dirCount} directories, ${fileCount} files`)
+module.exports = getPathTree
