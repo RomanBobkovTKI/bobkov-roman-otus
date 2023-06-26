@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/RomanBobkovTKI/bobkov-roman-otus/issues"
   },
-  "homepage": "https://github.com/RomanBobkovTKI/bobkov-roman-otus#readme"
+  "homepage": "https://github.com/RomanBobkovTKI/bobkov-roman-otus#readme",
+  "dependencies": {
+    "jest": "^29.5.0"
+  }
 }
