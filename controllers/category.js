@@ -6,8 +6,8 @@ const errorHeandler = require('../utils/errorHeandlers')
 module.exports.getAll = async (req, res) => {
     try {
         const categories = await Category.find({user: req.user.id})
-        res.status(200)
-            .json(categories)
+        res.status(200).json(categories)
+        
     } catch (err) {
         errorHeandler(res, err)
     }
