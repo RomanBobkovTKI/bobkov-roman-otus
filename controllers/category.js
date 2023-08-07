@@ -1,4 +1,3 @@
-const categoty = require('../models/categoty')
 const Category = require('../models/categoty')
 const Position = require('../models/position')
 const errorHeandler = require('../utils/errorHeandlers')
@@ -25,8 +24,8 @@ module.exports.getById = async (req, res) => {
 
 module.exports.remove = async(req, res) => {
     try {
-        await Category.remove({_id: req.params.id})
-        await Position.remove({category: req.params.id})
+        await Category.deleteMany({_id: req.params.id})
+        await Position.deleteMany({category: req.params.id})
 
         res.status(200)
             .json({
@@ -65,7 +64,7 @@ module.exports.update = async(req, res) => {
     
     try {
         const category = await Category.findByIdAndUpdate(
-            {_id: id.params.id},
+            {_id: req.params.id},
             {$set: updated},
             {new: true}
         )

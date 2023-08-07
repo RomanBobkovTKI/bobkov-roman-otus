@@ -34,7 +34,7 @@ module.exports.create = async(req, res) => {
 module.exports.update = async(req, res) => {
     try {
         const position = await Position.findOneAndUpdate(
-            {_id: id.params.id},
+            {_id: req.params.id},
             {$set: req.body},
             {new: true}
         )
@@ -49,7 +49,7 @@ module.exports.update = async(req, res) => {
 
 module.exports.remove = async(req, res) => {
     try {
-        await Position.remove({_id: req.params.id})
+        await Position.deleteMany({_id: req.params.id})
         res.status(200)
             .json({
                 succsess: true,
