@@ -11,13 +11,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './shared/classes/token.interceptor';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
-import { AnalyticsPageComponent } from './analytics-page/analytics-page.component';
 import { HistoryPageComponent } from './history-page/history-page.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { CategoriesPageComponent } from './categories-page/categories-page.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { CategoriesFormComponent } from './categories-page/categories-form/categories-form.component';
 import { PositionFormComponent } from './categories-page/categories-form/position-form/position-form.component';
+import { OrderCategoriesComponent } from './order-page/order-categories/order-categories.component';
+import { OrderPositionsComponent } from './order-page/order-positions/order-positions.component';
+import { HistoryListComponent } from './history-page/history-list/history-list.component';
+import { HistoryFilterComponent } from './history-page/history-filter/history-filter.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +30,16 @@ import { PositionFormComponent } from './categories-page/categories-form/positio
     SiteLayoutComponent,
     RegisterPageComponent,
     OverviewPageComponent,
-    AnalyticsPageComponent,
     HistoryPageComponent,
     OrderPageComponent,
     CategoriesPageComponent,
     LoaderComponent,
     CategoriesFormComponent,
-    PositionFormComponent
+    PositionFormComponent,
+    OrderCategoriesComponent,
+    OrderPositionsComponent,
+    HistoryListComponent,
+    HistoryFilterComponent
   ],
   imports: [
     BrowserModule,
