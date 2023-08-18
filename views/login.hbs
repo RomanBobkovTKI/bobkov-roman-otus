@@ -1,7 +1,14 @@
 <div class="row">
+
+  {{#if message}}
+    <div class="alert {{messageClass}}" role="alert">
+        {{message}}
+    </div>
+  {{/if}}
+
   <form 
     class="col s12"
-    action="/register"
+    action="/login"
     method="POST"
     >
     <div class="row">

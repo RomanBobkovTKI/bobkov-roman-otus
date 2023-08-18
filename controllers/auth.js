@@ -3,6 +3,9 @@ const errorHeandler = require('../utils/errorHeandler')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys')
+const cookieParser = require('cookie-parser');
+
+const authTokens = {};
 
 module.exports.login = async(req, res) => {
     const candidate = await User.findOne({email: req.body.email})
@@ -16,10 +19,10 @@ module.exports.login = async(req, res) => {
             userId: candidate._id
          }, keys.jwt, {expiresIn: 60 * 60})
 
-         res.status(200)
-            .json({
-               token: `Bearer ${token}`
-            })
+         authTokens[token] = candidate
+
+         res.cookie('AuthToken', token)
+         res.redirect('/protected')
       } else {
          res.status(401)
             .json({
@@ -28,10 +31,10 @@ module.exports.login = async(req, res) => {
       }
 
     } else {
-      res.status(404)
-         .json({
-            Error: 'Пользователь с таким email не найден.'
-         })
+        res.render('login', {
+            message: 'Неверный email или пароль. Попробуйте еще раз.',
+            messageClass: 'alert-danger'
+        })
     }
 }
 
@@ -41,10 +44,10 @@ module.exports.register = async(req, res) => {
      })
 
     if (candidate) {
-        res.status(409)
-            .json({
-                error: 'Пользователь с таким email уже сущестсует.'
-            })
+        res.render('register', {
+            message: 'Пользователь с таким email уже зарегистрирован.',
+            messageClass: 'alert-danger'
+        })
     } else {
         const salt = bcrypt.genSaltSync(10)
         const password = await bcrypt.hash(req.body.password, salt)
@@ -54,16 +57,15 @@ module.exports.register = async(req, res) => {
             email: req.body.email,
             password: password
         })
-
+    
         try {
             await user.save()
-
-            res.status(201)
-            res.redirect('/login')
+            res.render('login', {
+                message: 'Регистрация успешна завершена. Войдите в систему для продолжения.',
+                messageClass: 'alert-success'
+            });
         } catch (error) {
             errorHeandler(res, error)
         }
-    } 
-
-
+    }
 }
