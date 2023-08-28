@@ -5,7 +5,7 @@ module.exports.requireAuth = (req, res, next) => {
         res.render('login', {
             message: 'Авторизуйтесь чтобы продолжить',
             messageClass: 'alert-danger',
-            isProtected: true
+            isProtected: false
         });
     }
 }

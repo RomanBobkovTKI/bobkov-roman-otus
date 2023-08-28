@@ -3,9 +3,7 @@ const errorHeandler = require('../utils/errorHeandler')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys')
-const cookieParser = require('cookie-parser');
-
-const authTokens = {};
+const Token = require('../models/token')
 
 module.exports.login = async(req, res) => {
     const candidate = await User.findOne({email: req.body.email})
@@ -19,15 +17,18 @@ module.exports.login = async(req, res) => {
             userId: candidate._id
          }, keys.jwt, {expiresIn: 60 * 60})
 
-         authTokens[token] = candidate
+         await new Token ({
+            token: token,
+            user: candidate.email
+        }).save()
 
          res.cookie('AuthToken', token)
          res.redirect('/protected')
       } else {
-         res.status(401)
-            .json({
-               Error: 'Некорректный пароль, попробуйте снова.'
-            })
+        res.render('login', {
+            message: 'Некорректный пароль, попробуйте снова.',
+            messageClass: 'alert-danger'
+        })
       }
 
     } else {
@@ -41,7 +42,7 @@ module.exports.login = async(req, res) => {
 module.exports.register = async(req, res) => {
     const candidate = await User.findOne({
         email: req.body.email
-     })
+    })
 
     if (candidate) {
         res.render('register', {
@@ -68,4 +69,14 @@ module.exports.register = async(req, res) => {
             errorHeandler(res, error)
         }
     }
+}
+
+module.exports.logout = async (req, res) => {
+
+    await Token.deleteMany({user: req.user})
+
+    res.clearCookie('AuthToken')
+    req.user = null
+
+    res.redirect('/')
 }

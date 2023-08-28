@@ -1,0 +1,21 @@
+<div class="row">
+    <form 
+    class="col s12"
+    action="/protected/addComment"
+    method="POST"
+    >
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="text" class="validate" required name="text">
+        <label for="email">Комментарий</label>
+      </div>
+      <div class="input-field col s12">
+        <input type="text" class="validate" required name="author">
+        <label for="password">Автор комментария</label>
+      </div>
+      <input type="hidden" name="lesson_id" value="{{lesson_id}}">
+    </div>
+
+    <button class="waves-effect waves-light btn btn-primary">Оставить комментарий</button>
+  </form>
+</div>

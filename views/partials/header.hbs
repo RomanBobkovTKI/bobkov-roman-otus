@@ -2,9 +2,21 @@
     {{#if isProtected}}
         <nav>
             <div class="nav-wrapper">
-                <a href="/" class="brand-logo">My courses</a>
+                <a href="/protected/courses" class="brand-logo">My courses</a>
+
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li class="active"><a href="/courses">Курсы</a></li>
+                    <li>
+                        <a 
+                        href="/"
+                        method="POST"
+                        >
+                            Выход
+                        </a>
+                    </li>
+                </ul>
+
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/protected/courses">Курсы</a></li>
                 </ul>
             </div>
         </nav>
