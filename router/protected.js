@@ -37,5 +37,3 @@ router.post('/addComment', authToken.requireAuth, Comment.addComment)
 router.get('/lesson/:id/deleteComment', authToken.requireAuth, Comment.deleteComment)
 
 module.exports = router
-
-//изменить перед мерджем тип методов для ревью
