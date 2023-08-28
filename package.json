@@ -4,7 +4,9 @@
   "description": "nodejs course",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "tsc",
+    "start": "npm run compile && node ./dist/index.js",
+    "dev": "npm run compile && nodemon ./dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,15 @@
   "bugs": {
     "url": "https://github.com/RomanBobkovTKI/bobkov-roman-otus/issues"
   },
-  "homepage": "https://github.com/RomanBobkovTKI/bobkov-roman-otus#readme"
+  "homepage": "https://github.com/RomanBobkovTKI/bobkov-roman-otus#readme",
+  "type": "module",
+  "dependencies": {
+    "@apollo/server": "^4.9.2",
+    "graphql": "^16.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.7",
+    "nodemon": "^3.0.1",
+    "typescript": "^5.2.2"
+  }
 }
