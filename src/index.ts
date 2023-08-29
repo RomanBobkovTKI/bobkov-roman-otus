@@ -4,31 +4,38 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 const typeDefs = `#graphql
 
   type Token {
-    token: String
+    token: String!
+  }
+
+  type Text {
+    info: String
   }
 
   type Query {
-    confirm: Boolean
+    confirm: Text
   }
 
   type Mutation {
-    auth(token: String!): [Token]
+    auth: Token!
   }
+
 `;
 
-const token = {
-    token: '123'
+const info = {
+  info: 'Some text'
 }
+
+const token = {
+  token: 'Some token'
+} 
 
 const resolvers = {
     Query: {
-      confirm: () => true
+      confirm: () => info
     },
 
     Mutation: {
-        auth(_, args, context) {
-            
-        }
+      auth: () => token
     }
 };
 
