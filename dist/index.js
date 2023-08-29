@@ -14,8 +14,12 @@ const typeDefs = `#graphql
 const resolvers = {
     Query: {
         confirm: (_, __, context) => {
-            if (context.token == 'Some token')
-                return true;
+          if (context.token == 'Some token') {
+            return true
+          }
+            else {
+              return false
+          } 
         }
     },
     Mutation: {
