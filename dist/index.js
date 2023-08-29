@@ -2,59 +2,32 @@ import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 const typeDefs = `#graphql
 
-  type Book {
-    title: String
-    author: String
-  }
-
-  type Token {
-    token: String!
-  }
-
-  type Text {
-    info: String
-  }
-
   type Query {
-    books: [Book],
-    confirm: Text
+    confirm: Boolean
   }
 
   type Mutation {
-    auth: Token!
+    auth: String!
   }
 
 `;
-const books = [
-    {
-        title: 'The Awakening',
-        author: 'Kate Chopin',
-    },
-    {
-        title: 'City of Glass',
-        author: 'Paul Auster',
-    },
-];
-const info = {
-    info: 'Some text'
-};
-const token = {
-    token: 'Some token'
-};
 const resolvers = {
     Query: {
-        books: () => books,
-        confirm: () => info
+        confirm: (_, __, context) => {
+            if (context.token == 'Some token')
+                return true;
+        }
     },
     Mutation: {
-        auth: () => token
+        auth: () => 'Some token'
     }
 };
 const server = new ApolloServer({
     typeDefs,
-    resolvers,
+    resolvers
 });
 const { url } = await startStandaloneServer(server, {
+    context: async ({ req }) => ({ token: req.headers.token }),
     listen: { port: 4000 },
 });
 console.log(`🚀  Server ready at: ${url}`);

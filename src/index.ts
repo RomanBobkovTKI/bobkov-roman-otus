@@ -1,51 +1,44 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
+import { GraphQLError } from 'graphql/error/GraphQLError.js';
 
 const typeDefs = `#graphql
 
-  type Token {
-    token: String!
-  }
-
-  type Text {
-    info: String
-  }
-
   type Query {
-    confirm: Text
+    confirm: Boolean
   }
 
   type Mutation {
-    auth: Token!
+    auth: String!
   }
 
 `;
 
-const info = {
-  info: 'Some text'
+interface MyContext {
+  token?: String;
 }
-
-const token = {
-  token: 'Some token'
-} 
 
 const resolvers = {
     Query: {
-      confirm: () => info
+      confirm: (_, __, context) => {
+        if (context.token == 'Some token')
+        return true
+      }
     },
 
     Mutation: {
-      auth: () => token
+      auth: () => 'Some token'
     }
 };
 
-const server = new ApolloServer({
+const server = new ApolloServer<MyContext>({
     typeDefs,
-    resolvers,
+    resolvers
 });
 
 const { url } = await startStandaloneServer(server, {
-listen: { port: 4000 },
+  context: async ({ req }) => ({ token: req.headers.token }),
+  listen: { port: 4000 },
 });
 
 console.log(`🚀  Server ready at: ${url}`);
