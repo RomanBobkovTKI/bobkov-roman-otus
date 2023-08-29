@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
     }).subscribe(({data}: any) => {
       this.token = data.auth;
       this.cookieService.set('token', `${this.token}`);
+      localStorage.setItem('token', `${this.token}`)
     }
     , (error) => {
       this.error = error;
