@@ -1,6 +1,8 @@
 const lessons = require('../models/lesson')
 const courses = require('../models/course')
 const comment = require('../models/comment')
+const errorHeandler = require('../utils/errorHeandler')
+const { all } = require('../router/protected')
 
 class Lesson {
 
@@ -32,12 +34,7 @@ class Lesson {
             })
         } catch (error) {
             const allCourses = await courses.find({}).lean()
-            res.render('protectedMain', {
-                allCourses,
-                isProtected: true,
-                message: `${error}`,
-                messageClass: 'alert-success'
-            });
+            errorHeandler(res, error, `protectedMain`, true, allCourses)
         }
     }
 
@@ -93,11 +90,7 @@ class Lesson {
                 allCourses
             })
         } catch (error) {
-            res.render('protectedMain', {
-                isProtected: true,
-                message: `${error}`,
-                messageClass: 'alert-success'
-            });
+            errorHeandler(res, error, `protectedMain`, true)
         }
 
     }
@@ -114,11 +107,7 @@ class Lesson {
                 message: `Курс успешно удален`
             })
         } catch (error) {
-            res.render('protectedMain', {
-                isProtected: true,
-                message: `${error}`,
-                messageClass: 'alert-success'
-            });
+            errorHeandler(res, error, `protectedMain`, true)
         }
     }
 

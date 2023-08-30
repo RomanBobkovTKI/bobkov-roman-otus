@@ -16,6 +16,16 @@ const commentSchema = new mongoose.Schema({
     }
 })
 
+commentSchema.methods.joiValidate = function(obj) {
+	var Joi = require('joi');
+	var schema = {
+		text: Joi.types.String().required(),
+        author: Joi.types.String().required(),
+        lesson_id: Joi.types.String().required(),
+	}
+	return Joi.validate(obj, schema);
+}
+
 module.exports = mongoose.model('comment', commentSchema)
  
     

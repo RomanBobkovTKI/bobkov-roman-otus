@@ -1,5 +1,6 @@
 const courses = require('../models/course')
 const lessons = require('../models/lesson')
+const errorHeandler = require('../utils/errorHeandler')
 
 class Courses {
 
@@ -70,11 +71,7 @@ class Courses {
                     allCourses
                 });
             } catch (error) {
-                res.render('protectedMain', {
-                    isProtected: true,
-                    message: `${error}`,
-                    messageClass: 'alert-success'
-                });
+                errorHeandler(res, error, 'protectedMain', true )
             }
         }
     }
@@ -90,11 +87,7 @@ class Courses {
                 allCourses
             })
         } catch (err) {
-            res.render('protectedMain', {
-                isProtected: true,
-                message: `${err}`,
-                messageClass: 'alert-success'
-            });
+            errorHeandler(res, error, 'protectedMain', true )
         }
     }
 
@@ -119,11 +112,7 @@ class Courses {
                 allCourses
             })
         } catch (err) {
-            res.render('protectedMain', {
-                isProtected: true,
-                message: `${error}`,
-                messageClass: 'alert-success'
-            });
+            errorHeandler(res, error, 'protectedMain', true )
         }
     }
 

@@ -20,4 +20,15 @@ const lessonSchema = new mongoose.Schema({
     }
 })
 
+lessonSchema.methods.joiValidate = function(obj) {
+	var Joi = require('joi');
+	var schema = {
+		title: Joi.types.String().required(),
+        desc: Joi.types.String().required(),
+        course_id: Joi.types.String().required(),
+        videoSrc: Joi.types.String().required(),
+	}
+	return Joi.validate(obj, schema);
+}
+
 module.exports = mongoose.model('lessons', lessonSchema)

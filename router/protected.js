@@ -13,27 +13,27 @@ router.get('/', authToken.requireAuth, (_, res) => {
         isProtected: true
     })
 })
-
+router.use(authToken.requireAuth)
 router.post('/logout', controller.login)
-router.get('/courses', authToken.requireAuth, Courses.getAll)
+router.get('/courses', Courses.getAll)
 
-router.get('/addCourse', authToken.requireAuth, Courses.getAddCourse)
-router.post('/addCourse', authToken.requireAuth, Courses.addCourse)
+router.get('/addCourse', Courses.getAddCourse)
+router.post('/addCourse', Courses.addCourse)
 
-router.get('/courses/:id', authToken.requireAuth, Courses.getById)
-router.get('/courses/:id/edit', authToken.requireAuth, Courses.getEditCourse)
-router.post('/courses/edit', authToken.requireAuth, Courses.updateCourse)
-router.get('/courses/:id/delete', authToken.requireAuth, Courses.deleteCourse)
+router.get('/courses/:id', Courses.getById)
+router.get('/courses/:id/edit', Courses.getEditCourse)
+router.post('/courses/edit', Courses.updateCourse)
+router.get('/courses/:id/delete', Courses.deleteCourse)
 
-router.get('/courses/:id/addLesson', authToken.requireAuth, Lesson.getAddPage)
-router.post('/addLesson', authToken.requireAuth, Lesson.addPage)
-router.get('/lesson/:id', authToken.requireAuth, Lesson.getLessonPage)
-router.get('/lesson/:id/edit', authToken.requireAuth, Lesson.getEditPage)
-router.post('/lesson/edit', authToken.requireAuth, Lesson.editLesson)
-router.get('/lesson/:id/delete', authToken.requireAuth, Lesson.deleteLesson)
+router.get('/courses/:id/addLesson', Lesson.getAddPage)
+router.post('/addLesson', Lesson.addPage)
+router.get('/lesson/:id', Lesson.getLessonPage)
+router.get('/lesson/:id/edit', Lesson.getEditPage)
+router.post('/lesson/edit', Lesson.editLesson)
+router.get('/lesson/:id/delete', Lesson.deleteLesson)
 
-router.get('/lesson/:id/addComment', authToken.requireAuth, Comment.getAddCommentPage)
-router.post('/addComment', authToken.requireAuth, Comment.addComment)
-router.get('/lesson/:id/deleteComment', authToken.requireAuth, Comment.deleteComment)
+router.get('/lesson/:id/addComment', Comment.getAddCommentPage)
+router.post('/addComment', Comment.addComment)
+router.get('/lesson/:id/deleteComment', Comment.deleteComment)
 
 module.exports = router

@@ -13,4 +13,13 @@ const courseSchema = new mongoose.Schema({
     },
 })
 
+courseSchema.methods.joiValidate = function(obj) {
+	var Joi = require('joi');
+	var schema = {
+		title: Joi.types.String().required(),
+        desc: Joi.types.String().required(),
+	}
+	return Joi.validate(obj, schema);
+}
+
 module.exports = mongoose.model('courses', courseSchema)

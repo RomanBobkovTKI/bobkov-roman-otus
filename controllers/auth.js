@@ -66,7 +66,7 @@ module.exports.register = async(req, res) => {
                 messageClass: 'alert-success'
             });
         } catch (error) {
-            errorHeandler(res, error)
+            errorHeandler(res, error, 'login', null)
         }
     }
 }
