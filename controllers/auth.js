@@ -4,6 +4,14 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys')
 const Token = require('../models/token')
+const Joi = require('joi');
+
+const UserSchema = {
+    first_name: Joi.types.String().min(6).max(30).required(),
+    last_name: Joi.types.String().min(6).max(30).required(),
+    password: Joi.types.String().min(8).max(30).regex(/[a-zA-Z0-9]{3,30}/).required(),
+    email: Joi.types.String().email().required(),
+}
 
 module.exports.login = async(req, res) => {
     const candidate = await User.findOne({email: req.body.email})
@@ -58,13 +66,17 @@ module.exports.register = async(req, res) => {
             email: req.body.email,
             password: password
         })
-    
+
+        const result = Joi.validate(user, UserSchema);
+        
         try {
-            await user.save()
-            res.render('login', {
+            if (result) {
+                await user.save()
+                res.render('login', {
                 message: 'Регистрация успешна завершена. Войдите в систему для продолжения.',
                 messageClass: 'alert-success'
             });
+            }   
         } catch (error) {
             errorHeandler(res, error, 'login', null)
         }
