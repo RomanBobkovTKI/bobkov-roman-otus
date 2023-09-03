@@ -20,6 +20,8 @@
   "type": "module",
   "dependencies": {
     "@apollo/server": "^4.9.2",
+    "cookie": "^0.5.0",
+    "cookie-parser": "^1.4.6",
     "graphql": "^16.8.0"
   },
   "devDependencies": {

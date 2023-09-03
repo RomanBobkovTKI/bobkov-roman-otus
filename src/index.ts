@@ -31,7 +31,16 @@ const resolvers = {
     },
 
     Mutation: {
-      auth: () => 'Some token'
+      auth: (_, { res }) => {
+        try {
+          res.cookie("jwt", "token", {
+            httpOnly: true
+          });
+          return "Some token";
+        } catch (error) {
+          return "error";
+        }
+      }
     }
 };
 

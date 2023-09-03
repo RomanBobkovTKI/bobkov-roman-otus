@@ -14,8 +14,9 @@ const typeDefs = `#graphql
 const resolvers = {
     Query: {
         confirm: (_, __, context) => {
-          if (context.token == 'Some token') {
-            return true
+          console.log(context.req.cookie)
+          if (context.req.cookie[token] == 'Some token') {
+            return context.req.cookie
           }
             else {
               return false
@@ -23,15 +24,27 @@ const resolvers = {
         }
     },
     Mutation: {
-        auth: () => 'Some token'
+      auth: (_, __, { res }) => {
+        try {
+          res.cookie("token", "Some token", {
+            httpOnly: true
+          });
+          return "Some token";
+        } catch (error) {
+          return "error";
+        }
+      }
     }
 };
 const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    networkInterface
 });
 const { url } = await startStandaloneServer(server, {
-    context: async ({ req }) => ({ token: req.headers.token }),
+    context: ({ req, res }) => {
+      return { req, res };
+    },
     listen: { port: 4000 },
 });
 console.log(`🚀  Server ready at: ${url}`);
