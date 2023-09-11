@@ -9,9 +9,10 @@ program.configureHelp({
   subcommandTerm: (cmd) => cmd.name()
 });
 
-//Опсание команд
 program.command('auth [user, password]', 'Login in app')
-/* program
-  .option('test') */
+program.command('create-txt-file [text]', 'Create txt file')
+program.command('read-txt-file [path]', 'Read txt file')
+program.command('update-txt-file [path, text]', 'Update txt file')
+program.command('delete-txt-file [path]', 'Delete txt file')
 
 program.parse();
