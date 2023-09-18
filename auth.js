@@ -15,21 +15,23 @@ program
       login = prompt('login:');
       const user = findUser(login);
       if (user) {
-      console.log(`Login ${user.login} already taken.`);
+        password = prompt.hide('password:');
+        addUser(login, password)
+        process.env.IS_AUTH==='true'
       } else {
-      password = prompt.hide('password:');
-      addUser(login, password)
-      process.env.IS_AUTH==='true'
+        login = prompt('login:');
+        password = prompt.hide('password:');
+        addUser(login, password)
+        process.env.IS_AUTH==='true'
       }
     } else {
       console.log('You are already logged in')
     }
     
-  });
+  })
+  .parse(process.argv);
 
-program.parse();
-
-export function addUser(login, password) {
+function addUser(login, password) {
   const data = fs.readFileSync('users.json', 'utf8');
   const users = JSON.parse(data);
   users.push({ login, password });
@@ -37,7 +39,7 @@ export function addUser(login, password) {
   fs.writeFileSync('users.json', newData);
 }
 
-export function findUser(login) {
+function findUser(login) {
   const data = fs.readFileSync('users.json', 'utf8');
   const users = JSON.parse(data);
   const foundUser = users.find(user => user.login === login);
