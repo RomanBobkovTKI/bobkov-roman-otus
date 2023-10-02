@@ -29,7 +29,8 @@ program
     }
     
   })
-  .parse(process.argv);
+
+program.parse(process.argv);
 
 function addUser(login, password) {
   const data = fs.readFileSync('users.json', 'utf8');

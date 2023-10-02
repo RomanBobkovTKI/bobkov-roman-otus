@@ -21,5 +21,6 @@ program
       console.log('You are already logged in')
     }
   })
-  .parse(process.argv)
+
+program.parse(process.argv);
 

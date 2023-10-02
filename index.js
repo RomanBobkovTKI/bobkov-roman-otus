@@ -1,29 +1,22 @@
 #!/usr/bin/env node
 
-const { Command } = require('commander')
-const program = new Command()
-const auth = require('./auth');
-const update = require('./update-txt-file')
-const deleteFile = require('./delete-txt-file')
-const create = require('./create-txt-file')
+const { Command } = require('commander');
+const program = new Command();
 
 program
   .version('1.0.0')
   .description('My CLI application')
   .option('-f, --file <filename>', 'Specify a file name')
+  .option('-t, --text <string>', 'Text for file')
+  .option('-c, --content <text>', 'Specify new file content')
   .command('start', 'Start the application')
-  .action((cmd) => {
-    if (cmd === 'auth') {
-      auth(program.opts());
-    } else if (cmd === 'delete') {
-        deleteFile(program.opts())
-    } else if (cmd === 'create') {
-        create(program.opts())
-    } else if (cmd === 'update') {
-        update(program.opts())
-    }
-  })
-  .parse(process.argv);
+  .command('create-txt-file', 'Create txt file')
+  .command('delete-txt-file', 'Delete txt file')
+  .command('read-txt-file', 'Read txt file')
+  .command('update-txt-file', 'Update txt file')
+  .command('auth', 'Auth in the system')
+
+program.parse();
 
 exports = module.exports = new Command();
 exports.program = exports;
