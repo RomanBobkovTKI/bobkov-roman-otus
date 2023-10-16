@@ -1,0 +1,19 @@
+{
+  "name": "bobkov-roman-otus",
+  "version": "1.0.0",
+  "description": "nodejs course",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RomanBobkovTKI/bobkov-roman-otus.git"
+  },
+  "author": "r.bobkov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RomanBobkovTKI/bobkov-roman-otus/issues"
+  },
+  "homepage": "https://github.com/RomanBobkovTKI/bobkov-roman-otus#readme"
+}
