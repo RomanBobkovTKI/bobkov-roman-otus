@@ -1,0 +1,25 @@
+<div class="row">
+    <form 
+    class="col s12"
+    action="/protected/addLesson"
+    method="POST"
+    >
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="text" class="validate" required name="title">
+        <label for="email">Название урока</label>
+      </div>
+      <div class="input-field col s12">
+        <input type="text" class="validate" required name="desc">
+        <label for="password">Описание урока</label>
+      </div>
+      <div class="input-field col s12">
+        <input type="text" class="validate" required name="videoSrc">
+        <label for="password">Видео курса</label>
+      </div>
+      <input type="hidden" name="course_id" value={{id}}>
+    </div>
+
+    <button class="waves-effect waves-light btn btn-primary">Создать</button>
+  </form>
+</div>

@@ -1,0 +1,34 @@
+<h1 class="center">{{title}}</h1>
+<p class="center">{{desc}}</p>
+
+<div class="row">
+    <div class="col s12 m6">
+        <a class="center waves-effect waves-light btn btn-primary" 
+            href="/protected/courses/{{id}}/addLesson">
+            Добавить урок
+        </a>
+    </div>
+
+
+    {{#if allLessons.length}}
+        {{#each allLessons}}
+            <div class="row">
+                <div class="col s12 m12">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                    <span class="card-title">{{title}}</span>
+                    <p>{{desc}}</p>
+                    </div>
+                    <div class="card-action">
+                    <a href="/protected/lesson/{{_id}}">Открыть</a>
+                    <a href="/protected/lesson/{{_id}}/edit?allow=true">Редактировать</a>
+                    <a href="/protected/lesson/{{_id}}/delete" method="delete">Удалить</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+        {{/each}}
+        {{else}}
+            <p class="center">Уроков пока нет</p>
+        {{/if}}
+    </div>

@@ -1,0 +1,44 @@
+<footer>
+    {{#if isProtected}}
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/protected/courses" class="brand-logo">My courses</a>
+
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li>
+                        <a 
+                        href="/"
+                        method="POST"
+                        >
+                            Выход
+                        </a>
+                    </li>
+                </ul>
+
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/protected/courses">Курсы</a></li>
+                </ul>
+            </div>
+        </nav>
+    {{else}}
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo">My courses</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                {{#if isRegister}}
+                    <li class="active"><a href="/register">Регистрация</a></li>
+                {{else}} 
+                    <li><a href="/register">Регистрация</a></li>
+                {{/if}}
+
+                {{#if isLogin}}
+                    <li class="active"><a href="/login">Вход</a></li>
+                {{else}}
+                    <li><a href="/login">Вход</a></li>
+                {{/if}}
+                </ul>
+            </div>
+        </nav>
+    {{/if}}
+
+</footer>
