@@ -1,0 +1,14 @@
+name: Test build
+
+on:
+  push:
+    branches: 
+      'master'
+
+jobs:
+ build:
+   runs-on: ubuntu-latest
+   steps:
+     - name: Install dependencies
+       run: npm test
+    
