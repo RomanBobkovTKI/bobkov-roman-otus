@@ -1,14 +1,8 @@
-name: Test build
-
-on:
-  push:
-    branches: 
-      'master'
-
+name: hello-world
+on: push
 jobs:
- build:
-   runs-on: ubuntu-latest
-   steps:
-     - name: Install dependencies
-       run: npm run test
-    
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: my-step
+        run: echo "Hello World!"
